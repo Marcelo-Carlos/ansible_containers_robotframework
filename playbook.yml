@@ -1,0 +1,20 @@
+---
+- hosts: robot  
+  remote_user: msaca
+  become: yes
+  tasks: 
+  - name: "Executar o container Ubuntu"
+    docker_container: 
+      name: os
+      image: ubuntu:latest
+             
+  - name: "Executar o container Robotframework"
+    docker_container: 
+      name: robotframework
+      image: ppodgorsek/robot-framework
+      links: 
+        - "ubuntu"
+      ports: 
+        - "80:80"
+
+
